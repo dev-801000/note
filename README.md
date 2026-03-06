@@ -1,8 +1,3 @@
-# 📊 Data Science Practical Journal
-
-> **Subject:** Data Science  
-> **Total Practicals:** 8  
-> **Tools Used:** Microsoft Excel, Python 3.x, Pandas, NumPy, Matplotlib, Scikit-learn, Scipy
 
 ---
 
