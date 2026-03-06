@@ -51,13 +51,7 @@ Introduction to Excel
 2. Go to **DATA Menu** → **What-If Analysis** → **Goal Seek**.
 3. Set cell `C6`, To value `-50000`, By changing cell `C2` (Interest_Rate).
 
-## OUTPUT :-
-- Cells highlighted based on criteria (numbers and text).
-- Pivot table created and summarized.
-- VLOOKUP returns matching name from ID.
-- Goal Seek solves for the required interest rate.
 
----
 
 # PRACTICAL NO 2
 
@@ -121,13 +115,6 @@ print(df['species'])
 print(df.isnull().sum())
 ```
 
-## OUTPUT :-
-- Dataframe head displayed from CSV and JSON files.
-- Null counts shown before and after handling.
-- Scatter plot of Age vs Fitness displayed.
-- Sorted data and grouped counts printed.
-
----
 
 # PRACTICAL NO 3
 
@@ -177,11 +164,6 @@ else:
     print('Independent (H0 holds true)')
 ```
 
-## OUTPUT :-
-- T-test P-value printed with hypothesis decision.
-- Chi-square P-value printed with dependence/independence decision.
-
----
 
 # PRACTICAL NO 4
 
@@ -227,12 +209,6 @@ print(stats.f_oneway(asian, black, hispanic, other, white))
 print(posthoc_tukey(voter_frame, val_col="age", group_col="race"))
 ```
 
-## OUTPUT :-
-- F-statistic and P-value from One-Way ANOVA.
-- Tukey post-hoc test table showing pairwise comparisons between groups.
-
----
-
 # PRACTICAL NO 5
 
 ## AIM :-
@@ -246,52 +222,50 @@ Regression and Its Types
 ## CODE :-
 
 ```python
-# ── SIMPLE LINEAR REGRESSION ─────────────────────────────
-import pandas
+import pandas as pd
 import matplotlib.pyplot as plt
 from scipy import stats
+from sklearn.linear_model import LinearRegression
 
-df = pandas.read_csv("D:\Data Science\DATA.csv")
-x = df['Weight']
-y = df['CO2']
+# Load dataset
+df = pd.read_csv(r"D:\Roshan Science\Data.csv")
+
+print("Columns:", df.columns)
+
+# ── SIMPLE LINEAR REGRESSION ──
+x = df['Units Sold']
+y = df['Total Profit']
 
 slope, intercept, r, p, std_err = stats.linregress(x, y)
 
-def myfunc(x):
-    return slope * x + intercept
+def predict_profit(units):
+    return slope * units + intercept
 
-mymodel = list(map(myfunc, x))
+model = [predict_profit(i) for i in x]
 
 plt.scatter(x, y)
-plt.plot(x, mymodel)
+plt.plot(x, model)
+plt.xlabel("Units Sold")
+plt.ylabel("Total Profit")
+plt.title("Simple Linear Regression")
 plt.show()
 
-predictedCO2 = myfunc(2300)
-print("Predicted CO2:", predictedCO2)
+predicted = predict_profit(5000)
+print("Predicted Profit (Simple Regression):", predicted)
 
 
-# ── MULTIPLE LINEAR REGRESSION ───────────────────────────
-import pandas
-from sklearn import linear_model
+# ── MULTIPLE LINEAR REGRESSION ──
+X = df[['Units Sold', 'Unit Price']]
+y = df['Total Profit']
 
-df = pandas.read_csv("D:\Data Science\DATA.csv")
-X = df[['Weight', 'Volume']]
-y = df['CO2']
+model2 = LinearRegression()
+model2.fit(X, y)
 
-regr = linear_model.LinearRegression()
-regr.fit(X, y)
+prediction = model2.predict([[5000, 200]])
 
-prediction_data = pandas.DataFrame([[2300, 1300]], columns=['Weight', 'Volume'])
-predictedCO2 = regr.predict(prediction_data)
-print("Predicted CO2 (Multiple Regression):", predictedCO2)
+print("Predicted Profit (Multiple Regression):", prediction[0])
 ```
 
-## OUTPUT :-
-- Scatter plot with regression line displayed.
-- Predicted CO2 value for given Weight (Simple Regression).
-- Predicted CO2 value for given Weight + Volume (Multiple Regression).
-
----
 
 # PRACTICAL NO 6
 
@@ -306,38 +280,45 @@ Logistic Regression and Decision Tree
 ## CODE :-
 
 ```python
-import numpy
-from sklearn import linear_model
+import numpy as np
 import pandas as pd
+from sklearn.linear_model import LogisticRegression
 
-# ── Binary Logistic Regression ───────────────────────────
-X = numpy.array([3.78, 2.44, 2.09, 0.14, 1.72, 1.65,
-                 4.92, 4.37, 4.96, 4.52, 3.69, 5.88]).reshape(-1, 1)
-y = numpy.array([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1])
+# ── Binary Logistic Regression Example ──
+X = np.array([3.78, 2.44, 2.09, 0.14, 1.72, 1.65,
+              4.92, 4.37, 4.96, 4.52, 3.69, 5.88]).reshape(-1, 1)
 
-logr = linear_model.LogisticRegression()
-logr.fit(X, y)
+y = np.array([0,0,0,0,0,0,1,1,1,1,1,1])
 
-predicted = logr.predict(numpy.array([3.46]).reshape(-1, 1))
+model = LogisticRegression()
+model.fit(X, y)
+
+predicted = model.predict(np.array([[3.46]]))
 print("Predicted class:", predicted)
 
-# ── Iris Dataset Classification ──────────────────────────
-df = pd.read_csv("D:/Data Science/Iris.csv")
-X1 = numpy.array(df['SepalLengthCm']).reshape(-1, 1)
-y  = df['Species']
 
-logr = linear_model.LogisticRegression()
-logr.fit(X1, y)
+# ── Iris Dataset Classification ──
+df = pd.read_csv(r"D:\Roshan Science\Iris.csv")
 
-predicted = logr.predict(numpy.array([3.4]).reshape(-1, 1))
-print("Predicted species:", predicted)
+# Remove spaces from column names
+df.columns = df.columns.str.strip()
+
+# Show column names
+print("Dataset Columns:", df.columns)
+
+# Automatically pick first feature column and target
+X1 = df.iloc[:, 0].values.reshape(-1, 1)   # first column
+y1 = df.iloc[:, -1]                        # last column (species)
+
+iris_model = LogisticRegression(max_iter=200)
+iris_model.fit(X1, y1)
+
+prediction = iris_model.predict([[3.4]])
+
+print("Predicted species:", prediction)
 ```
 
-## OUTPUT :-
-- Predicted binary class (0 or 1) for given input.
-- Predicted Iris species for given Sepal Length.
 
----
 
 # PRACTICAL NO 7
 
@@ -386,12 +367,6 @@ plt.scatter(x, y, c=kmeans.labels_)
 plt.show()
 ```
 
-## OUTPUT :-
-- Scatter plot of raw data points.
-- Elbow Method plot showing inertia vs number of clusters.
-- Clustered scatter plot with color-coded labels.
-
----
 
 # PRACTICAL NO 8
 
@@ -471,31 +446,3 @@ plt.ylabel('PC2')
 plt.legend()
 plt.show()
 ```
-
-## OUTPUT :-
-- Explained variance ratio for each principal component printed.
-- Visualization of Logistic Regression decision boundary in PC1 vs PC2 space.
-
----
-
-## 🛠️ Prerequisites
-
-```bash
-pip install pandas numpy matplotlib scikit-learn scipy scikit-posthocs
-```
-
----
-
-## 📁 Required Dataset Files
-
-| File | Used In |
-|------|---------|
-| `CardioGoodFitness.csv` | Practical 2 |
-| `iris.json` | Practical 2 |
-| `DATA.csv` | Practical 5 |
-| `Iris.csv` | Practical 6 |
-| `wine.csv` | Practical 8 |
-
----
-
-*📘 Data Science Lab Journal — For Educational Use Only*
