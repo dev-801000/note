@@ -265,6 +265,10 @@ prediction = model2.predict([[5000, 200]])
 
 print("Predicted Profit (Multiple Regression):", prediction[0])
 ```
+```Csv
+https://github.com/wlodarzmar/csvToSqlTable/blob/master/100%20Sales%20Records.csv
+
+```
 
 
 # PRACTICAL NO 6
