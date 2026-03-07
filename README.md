@@ -51,7 +51,19 @@ Introduction to Excel
 2. Go to **DATA Menu** → **What-If Analysis** → **Goal Seek**.
 3. Set cell `C6`, To value `-50000`, By changing cell `C2` (Interest_Rate).
 
-
+```Excel
+Name	Type	HP	Attack	Defense	Sp. Atk	Sp. Def	Speed
+Bulbasaur	Grass/Poison	45	49	49	65	65	45
+Charmander	Fire	39	52	43	60	50	65
+Squirtle	Water	44	48	65	50	64	43
+Pikachu	Electric	39	55	40	50	50	90
+Jigglypuff	Normal/Fairy	115	45	20	45	25	20
+Meowth	Normal	40	45	35	40	40	90
+Psyduck	Water	50	52	48	65	50	55
+Snorlax	Normal	160	110	65	65	110	30
+Eevee	Normal	55	55	50	45	65	55
+Mewtwo	Psychic	106	110	90	154	90	130
+```
 
 # PRACTICAL NO 2
 
