@@ -1,464 +1,169 @@
 
----
 
 # PRACTICAL NO 1
 
 ## AIM :-
-Introduction to Excel
-- a. Perform conditional formatting on a dataset using various criteria.
-- b. Create a pivot table to analyze and summarize data.
-- c. Use VLOOKUP function to retrieve information from a different worksheet or table.
-- d. Perform what-if analysis using Goal Seek to determine input values for desired output.
+Understanding the Sensor Node Hardware. (For Eg. Sensors, Nodes(Sensor mote), Base Station, Graphical User Interface.) 
 
 ---
 
 ## STEPS :-
+1. Sensor node hardware ke main components identify karo: **Sensors, Motes/Nodes, Base Station, GUI**.
+2. Architecture samjho: **Perception Layer, Network Layer, Application Layer**.
+3. Applications list karo: Environmental Monitoring, Healthcare, Industrial IoT.
+4. Challenges note karo: power consumption, scalability, security.
+## OUTPUT :-
+- Sensor node hardware ka overview clear hua aur WSN design perspective samjha. 
 
-**a. Conditional Formatting :-**
-
-**1) Equal To (Numbers):**
-1. Open Excel and create a new excel sheet. Select the range `C2:H11` for all stat values.
-2. Click on the **Conditional Formatting** icon from Home menu → **Highlight Cell Rules** → **Equal To**.
-3. Enter `50` into the input field and select the appearance.
-
-**2) Equal To (Text):**
-1. Select range `A2:A11`.
-2. Click on **Conditional Formatting** → **Highlight Cell Rules** → **Equal To**.
-3. Enter `"Jigglypuff"` and select appearance.
-
-**3) Greater Than:**
-1. Select range `C2:H11` (Numbers) or `A2:A11` (Text).
-2. Click on **Conditional Formatting** → **Highlight Cell Rules** → **Greater Than**.
-3. Enter `50` (for numbers) or `"Jigglypuff"` (for text).
-
-**4) Less Than:**
-1. Select range `C2:H11` (Numbers) or `A2:A11` (Text).
-2. Click on **Conditional Formatting** → **Highlight Cell Rules** → **Less Than**.
-3. Enter `50` (for numbers) or `"Jigglypuff"` (for text).
-
-**b. Pivot Table :-**
-1. Select data range `A1:H11`.
-2. Click **PivotTable** from the **Insert** menu.
-3. Choose **Existing Worksheet** as location.
-4. Drag desired fields to Rows, Columns, and Values areas.
-
-**c. VLOOKUP :-**
-1. Use the VLOOKUP function to find a name based on ID.
-2. If it returns `#N/A`, feed a value (e.g., `5`) in cell `L3`.
-
-**d. Goal Seek :-**
-1. Set up cells with financial data. Use the `PMT` function in cell `C6` for EMI calculation.
-2. Go to **DATA Menu** → **What-If Analysis** → **Goal Seek**.
-3. Set cell `C6`, To value `-50000`, By changing cell `C2` (Interest_Rate).
-
-```Excel
-Name	Type	HP	Attack	Defense	Sp. Atk	Sp. Def	Speed
-Bulbasaur	Grass/Poison	45	49	49	65	65	45
-Charmander	Fire	39	52	43	60	50	65
-Squirtle	Water	44	48	65	50	64	43
-Pikachu	Electric	39	55	40	50	50	90
-Jigglypuff	Normal/Fairy	115	45	20	45	25	20
-Meowth	Normal	40	45	35	40	40	90
-Psyduck	Water	50	52	48	65	50	55
-Snorlax	Normal	160	110	65	65	110	30
-Eevee	Normal	55	55	50	45	65	55
-Mewtwo	Psychic	106	110	90	154	90	130
-```
+---
 
 # PRACTICAL NO 2
 
 ## AIM :-
-Data Frames and Basic Data Pre-processing
-- a. Read data from CSV and JSON files into a data frame.
-- b. Perform basic data pre-processing tasks such as handling missing values and outliers.
-- c. Manipulate and transform data using functions like filtering, sorting, and grouping.
+Exploring and understanding TinyOS computational concepts:
+- Events, Commands and Task.
+- nesC model
+- nesC Components
 
 ---
 
-## CODE :-
+## STEPS :-
+1. **Events**: asynchronous signals (example: Timer fired type behavior).
+2. **Commands**: synchronous calls between components.
+3. **Tasks**: deferred computations executed sequentially (scheduler based).
+4. **nesC model**: **Modules (logic)** and **Configurations (wiring)**.
 
-```python
-import json
-import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
+## OUTPUT :-
+- TinyOS + nesC ka component-based approach aur event-driven model samjha. 
 
-# Creating a data frame from CSV
-df = pd.read_csv("D:\Data Science\CardioGoodFitness.csv")
-print(df.head())
-
-# Checking for missing values
-print(df.isnull().sum())
-
-# Dropping rows with missing values
-df1 = df.dropna(axis=0)
-print(df1.head())
-print(df1.isnull().sum())
-
-# Filling missing values with a default value
-df['MaritalStatus'] = df['MaritalStatus'].fillna('Single')
-print(df['MaritalStatus'])
-print(df.isnull().sum())
-
-# Visualizing outliers with scatter plot
-plt.scatter(x=df['Age'], y=df['Fitness'])
-plt.show()
-
-# Sorting data by Age in descending order
-sorted_df = df.sort_values(by='Age', ascending=False)
-print(sorted_df)
-
-# Grouping data by MaritalStatus
-mcount = df.groupby('MaritalStatus')['MaritalStatus'].count()
-print(mcount)
-
-# Reading data from JSON file
-f = open("D:\Data Science\iris.json")
-d = json.load(f)
-df = pd.DataFrame(d)
-print(df)
-print(df.isnull().sum())
-
-# Drop and fill missing values in JSON dataframe
-df1 = df.dropna(axis=0)
-print(df1.head())
-df['species'] = df['species'].fillna('setosa')
-print(df['species'])
-print(df.isnull().sum())
-```
-
+---
 
 # PRACTICAL NO 3
 
 ## AIM :-
-Hypothesis Testing
-- a. Formulate null and alternative hypotheses for a given problem.
-- b. Conduct a hypothesis test using appropriate statistical tests (e.g., t-test, chi-square test).
-- c. Interpret the results and draw conclusions based on the test outcomes.
+Create and simulate a simple adhoc network. 
 
 ---
 
-## CODE :-
-
-```python
-# ── T-TEST ──────────────────────────────────────────────
-from scipy.stats import ttest_1samp
-import numpy as np
-
-ages = [45, 89, 23, 46, 12, 69, 45, 24, 34, 67]
-print("Ages:", ages)
-
-mean = np.mean(ages)
-print("Mean:", mean)
-
-t_test, p_val = ttest_1samp(ages, 30)
-print("P-value is:", p_val)
-
-if p_val < 0.05:
-    print("We can reject the null hypothesis")
-else:
-    print("We can accept the null hypothesis")
-
-
-# ── CHI-SQUARE TEST ──────────────────────────────────────
-from scipy.stats import chi2_contingency
-
-data = [[207, 282, 241],
-        [234, 242, 232]]
-
-stat, p, dof, expected = chi2_contingency(data)
-alpha = 0.05
-
-print("p value is " + str(p))
-if p <= alpha:
-    print('Dependent (reject H0)')
-else:
-    print('Independent (H0 holds true)')
-```
-
+## STEPS :-
+1. Bottom toolbar se **Network Devices → Wireless Devices** me jaake **AP-PT (Access Point)** place karo.
+2. **End Devices** se **PC** select karke total **5 PCs** place karo.
+3. Har PC par: **Physical** tab → power off → ethernet module replace with **PT-HOST-NM-1W** → power on.
+4. Sab PCs ko wireless connect karke AP association verify karo.
+## OUTPUT :-
+- Successfully sab devices Access Point se connect ho gaye.
+---
 
 # PRACTICAL NO 4
 
 ## AIM :-
-ANOVA (Analysis of Variance)
-- a. Perform one-way ANOVA to compare means across multiple groups.
-- b. Conduct post-hoc tests to identify significant differences between group means.
+Understanding, Reading and Analyzing Routing Table of a network.
 
 ---
 
-## CODE :-
+## STEPS :-
+1. **3 Routers (1841)**, **3 Switches (2960-24TT)**, **5 PCs** place karke auto connection se connect karo.
+2. Router me serial interface add: **Physical** tab → power off → **WIC-2T** add → power on.
+3. Routers ko **Serial DCE** wire se connect karo (Serial0/0/0 ↔ Serial0/0/1).
+4. Routers ko IP addressing do (Router0/1/2).
+5. PCs ko IP addressing do.
+6. CLI me routing configure karo.
+7. `ping`/simulation se connectivity verify karo. 
 
-```python
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import scipy.stats as stats
-from scikit_posthocs import posthoc_tukey
+## OUTPUT :-
+- Routing established hua aur end-to-end connectivity verify hui.
 
-np.random.seed(12)
-
-races = ["asian", "black", "hispanic", "other", "white"]
-voter_race = np.random.choice(
-    a=races,
-    p=[0.05, 0.15, 0.25, 0.05, 0.5],
-    size=1000
-)
-voter_age = stats.poisson.rvs(loc=18, mu=30, size=1000)
-
-voter_frame = pd.DataFrame({"race": voter_race, "age": voter_age})
-groups = voter_frame.groupby("race").groups
-
-asian    = voter_age[groups["asian"]]
-black    = voter_age[groups["black"]]
-hispanic = voter_age[groups["hispanic"]]
-other    = voter_age[groups["other"]]
-white    = voter_age[groups["white"]]
-
-# One-Way ANOVA
-print(stats.f_oneway(asian, black, hispanic, other, white))
-
-# Post-hoc Tukey Test
-print(posthoc_tukey(voter_frame, val_col="age", group_col="race"))
-```
+---
 
 # PRACTICAL NO 5
 
 ## AIM :-
-Regression and Its Types
-- a. Implement simple linear regression using a dataset.
-- b. Explore and interpret the regression model coefficients and goodness-of-fit measures.
-- c. Extend the analysis to multiple linear regression and assess the impact of additional predictors.
+Create a basic MANET implementation simulation for Packet animation and Packet Trace.
 
 ---
 
-## CODE :-
+## STEPS :-
+1. **1 Wireless Router (WRT300N)** aur **5 Laptops** place karo.
+2. Har laptop me: power off → ethernet replace with **PT-LAPTOP-NM-1W** → power on.
+3. Wireless connection establish karke packet animation/trace observe karo. 
 
-```python
-import pandas as pd
-import matplotlib.pyplot as plt
-from scipy import stats
-from sklearn.linear_model import LinearRegression
+## OUTPUT :-
+- MANET simulation setup me devices successfully connected.
 
-# Load dataset
-df = pd.read_csv(r"D:\Roshan Science\Data.csv")
-
-print("Columns:", df.columns)
-
-# ── SIMPLE LINEAR REGRESSION ──
-x = df['Units Sold']
-y = df['Total Profit']
-
-slope, intercept, r, p, std_err = stats.linregress(x, y)
-
-def predict_profit(units):
-    return slope * units + intercept
-
-model = [predict_profit(i) for i in x]
-
-plt.scatter(x, y)
-plt.plot(x, model)
-plt.xlabel("Units Sold")
-plt.ylabel("Total Profit")
-plt.title("Simple Linear Regression")
-plt.show()
-
-predicted = predict_profit(5000)
-print("Predicted Profit (Simple Regression):", predicted)
-
-
-# ── MULTIPLE LINEAR REGRESSION ──
-X = df[['Units Sold', 'Unit Price']]
-y = df['Total Profit']
-
-model2 = LinearRegression()
-model2.fit(X, y)
-
-prediction = model2.predict([[5000, 200]])
-
-print("Predicted Profit (Multiple Regression):", prediction[0])
-```
-```Csv
-https://github.com/wlodarzmar/csvToSqlTable/blob/master/100%20Sales%20Records.csv
-
-```
-
+---
 
 # PRACTICAL NO 6
 
 ## AIM :-
-Logistic Regression and Decision Tree
-- a. Build a logistic regression model to predict a binary outcome.
-- b. Evaluate the model's performance using classification metrics (accuracy, precision, recall).
-- c. Construct a decision tree model and interpret the decision rules for classification.
-
+Implement a Wireless sensor network simulation.
 ---
 
-## CODE :-
+## STEPS :-
+1. **AP-PT**, **Server-PT**, **2 PCs**, **1 Laptop** place karo.
+2. Laptop me wireless module set karo (**PT-LAPTOP-NM-1W**).
+3. PCs me wireless module set karo (**PT-HOST-NM-1W**).
+4. Server me wireless module set karo (**PT-LAPTOP-NM-1W** as per journal).
+5. Wireless association verify karo.
+## OUTPUT :-
+- Wireless sensor network simulation successfully connected.
 
-```python
-import numpy as np
-import pandas as pd
-from sklearn.linear_model import LogisticRegression
-
-# ── Binary Logistic Regression Example ──
-X = np.array([3.78, 2.44, 2.09, 0.14, 1.72, 1.65,
-              4.92, 4.37, 4.96, 4.52, 3.69, 5.88]).reshape(-1, 1)
-
-y = np.array([0,0,0,0,0,0,1,1,1,1,1,1])
-
-model = LogisticRegression()
-model.fit(X, y)
-
-predicted = model.predict(np.array([[3.46]]))
-print("Predicted class:", predicted)
-
-
-# ── Iris Dataset Classification ──
-df = pd.read_csv(r"D:\Roshan Science\Iris.csv")
-
-# Remove spaces from column names
-df.columns = df.columns.str.strip()
-
-# Show column names
-print("Dataset Columns:", df.columns)
-
-# Automatically pick first feature column and target
-X1 = df.iloc[:, 0].values.reshape(-1, 1)   # first column
-y1 = df.iloc[:, -1]                        # last column (species)
-
-iris_model = LogisticRegression(max_iter=200)
-iris_model.fit(X1, y1)
-
-prediction = iris_model.predict([[3.4]])
-
-print("Predicted species:", prediction)
-```
-
-
+---
 
 # PRACTICAL NO 7
 
 ## AIM :-
-K-Means Clustering
-- a. Apply the K-Means algorithm to group similar data points into clusters.
-- b. Determine the optimal number of clusters using the Elbow Method or silhouette analysis.
-- c. Visualize the clustering results and analyze cluster characteristics.
+Create MAC protocol simulation implementation for wireless sensor Network. 
 
 ---
 
-## CODE :-
+## STEPS :-
+1. **WRT300N**, **3 Laptops**, **2 Smartphones**, **1 Tablet** place karo.
+2. Laptops ko wireless modules se enable karo.
+3. Device ka **Wireless0 MAC address** copy karo.
+4. Router GUI → Wireless → **Wireless MAC Filter** open karo.
+5. Filter enable karke policy select karo (prevent listed devices).
+6. MAC addresses add karke save karo.
 
-```python
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
+## OUTPUT :-
+- Listed MAC wale devices ka connection block/disconnect observe hua. 
 
-# Raw data
-x = [4, 5, 10, 4, 3, 11, 14, 6, 10, 12]
-y = [21, 19, 24, 17, 16, 25, 24, 22, 21, 21]
-
-# Scatter plot of raw data
-plt.scatter(x, y)
-plt.show()
-
-# Elbow Method to find optimal K
-data = list(zip(x, y))
-inertias = []
-
-for i in range(1, 11):
-    kmeans = KMeans(n_clusters=i)
-    kmeans.fit(data)
-    inertias.append(kmeans.inertia_)
-
-plt.plot(range(1, 11), inertias, marker='o')
-plt.title('Elbow Method')
-plt.xlabel('Number of clusters')
-plt.ylabel('Inertia')
-plt.show()
-
-# Apply K-Means with optimal K = 2
-kmeans = KMeans(n_clusters=2)
-kmeans.fit(data)
-
-plt.scatter(x, y, c=kmeans.labels_)
-plt.show()
-```
-
+---
 
 # PRACTICAL NO 8
 
 ## AIM :-
-Principal Component Analysis (PCA)
-- a. Perform PCA on a dataset to reduce dimensionality.
-- b. Evaluate the explained variance and select the appropriate number of principal components.
-- c. Visualize the data in the reduced-dimensional space.
+Simulate Mobile Adhoc Network with Directional Antenna.
 
 ---
 
-## CODE :-
+## STEPS :-
+1. **Fan, Door, Light, Motion Detector, Smartphone, Home Gateway** place karo.
+2. IoT devices me adapter **PT-IOT-NM-1W** set karo.
+3. IoT Server/Home Gateway mapping configure karo.
+4. Smartphone ko SSID ke through connect karo.
+5. Gateway LAN IP browser me open karke login (`admin/admin`).
+6. Conditions/Rules create karke motion detector se automation test karo. 
 
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
-from sklearn.linear_model import LogisticRegression
-from matplotlib.colors import ListedColormap
+## OUTPUT :-
+- Motion detect hone par automated actions (fan/light rules) observe hue.
 
-# Load dataset
-dataset = pd.read_csv("D:/Data Science/wine.csv")
-X = dataset.iloc[:, 0:13].values
-y = dataset.iloc[:, 13].values
+---
 
-# Train-Test Split
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=0
-)
+# PRACTICAL NO 9
 
-# Feature Scaling
-sc = StandardScaler()
-X_train = sc.fit_transform(X_train)
-X_test  = sc.transform(X_test)
+## AIM :-
+Create a mobile network using Cell Tower, Central Office Server, Web browser and Web Server.
 
-# Apply PCA (reduce to 2 components)
-pca = PCA(n_components=2)
-X_train = pca.fit_transform(X_train)
-X_test  = pca.transform(X_test)
+---
 
-explained_variance = pca.explained_variance_ratio_
-print("Explained Variance:", explained_variance)
+## STEPS :-
+1. **WRT-300N**, **PC**, **Server-PT**, **Smartphone**, **Cell Tower**, **Central-Office-Server** place karo.
+2. Cell Tower ↔ Central Office Server coaxial se connect karo.
+3. Server aur PC ko wireless module se connect karo.
+4. Server DHCP se IP lo aur IPv4 copy karo.
+5. Smartphone browser me server IP open karo.
+6. Smartphone ka IPv4 copy karke PC se ping test karo. 
+## OUTPUT :-
+- Mobile network components ke beech connectivity successfully verify hui.
 
-# Logistic Regression on reduced data
-classifier = LogisticRegression(random_state=0)
-classifier.fit(X_train, y_train)
-
-# Visualization
-X_set, y_set = X_train, y_train
-X1, X2 = np.meshgrid(
-    np.arange(start=X_set[:, 0].min() - 1, stop=X_set[:, 0].max() + 1, step=0.01),
-    np.arange(start=X_set[:, 1].min() - 1, stop=X_set[:, 1].max() + 1, step=0.01)
-)
-
-plt.contourf(X1, X2,
-    classifier.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
-    alpha=0.75,
-    cmap=ListedColormap(('yellow', 'white', 'aquamarine'))
-)
-
-plt.xlim(X1.min(), X1.max())
-plt.ylim(X2.min(), X2.max())
-
-for i, j in enumerate(np.unique(y_set)):
-    plt.scatter(
-        X_set[y_set == j, 0], X_set[y_set == j, 1],
-        c=ListedColormap(('red', 'green', 'blue'))(i),
-        label=j
-    )
-
-plt.title('Logistic Regression (Training set)')
-plt.xlabel('PC1')
-plt.ylabel('PC2')
-plt.legend()
-plt.show()
-```
+---
