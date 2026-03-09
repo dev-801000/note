@@ -166,7 +166,7 @@ Create MAC protocol simulation implementation for wireless sensor Network.
 ---
 
 ## STEPS :-
-1. Select WRT300N Router, 3 Laptops, 2 Smartphones, and 1 Tablet.
+1. Select Wireless router- WRT300N Router, 3 Laptops, 2 Smartphones, and 1 Tablet.
 
 2. Make Laptops wireless using the PT-LAPTOP-NM-1W module.
 
