@@ -1,4 +1,4 @@
----
+
 
 # PRACTICAL NO 1
 
@@ -241,3 +241,8 @@ Create a mobile network using Cell Tower, Central Office Server, Web browser and
 - Successful connectivity between mobile network components was verified.
 
 ---
+
+
+
+[A.pdf](https://github.com/user-attachments/files/25857642/A.pdf)
+
